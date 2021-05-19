@@ -15,5 +15,6 @@ class Solution(object):
                     res = max(res, i - stack[-1])
                 else:
                     stack.append(i)
+#             print(stack)
                     
         return res
