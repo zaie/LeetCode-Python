@@ -1,3 +1,7 @@
+# 动态规划转移方程：
+# f(i)=max{f(i−1)+nums[i],nums[i]}
+
+
 class Solution(object):
     def maxSubArray(self, nums):
         """
