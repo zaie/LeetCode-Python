@@ -16,3 +16,5 @@ class Solution:
                 while s[right] in s[left:right]:
                     left +=1
         return res
+        
+![image](https://github.com/zaie/LeetCode-Python/assets/17739876/5a4f060e-a10a-4587-89d2-d983f7fd411e)
