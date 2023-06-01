@@ -17,3 +17,21 @@ class Solution:
         left = max(nums1[i-1] if i else float('-inf'), nums2[j-1] if j else float('-inf'))
         right = min(nums1[i] if i<m else float('inf'), nums2[j]if j<n else float('inf'))
         return right if (m + n) % 2 else (left+right) / 2
+    
+# 简单方法：合并排序取中间
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        nums=nums2+nums1
+        nums.sort()
+        p=len(nums)
+        if p%2==0:
+            return (round(nums[p//2-1],5)+nums[p//2])/2
+        else:
+            o=nums[p//2]
+            return o
+
