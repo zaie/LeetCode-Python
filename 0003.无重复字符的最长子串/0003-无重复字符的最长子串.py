@@ -1,4 +1,5 @@
-# 双指针，如果有重复的就动左指针，否则就动右指针，记录最大长度
+# 双指针，如果没有重复就扩大（就动左指针），记录最大长度
+# 否则就动右指针，直到没有重复为止
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         left,right = 0,0
