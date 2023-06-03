@@ -1,37 +1,31 @@
-class Solution(object):
-    def exist(self, board, word):
-        """
-        :type board: List[List[str]]
-        :type word: str
-        :rtype: bool
-        """
-        if not board or not board[0]:
+# 回溯算法 + dfs
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        row = len(board)
+        col = len(board[0])
+
+        def core_function(i, j, k, visited):
+            #print(i,j, k,visited)
+            if k == len(word):
+                return True
+            for x, y in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
+                tmp_i = x + i
+                tmp_j = y + j
+                if 0 <= tmp_i < row and 0 <= tmp_j < col and (tmp_i, tmp_j) not in visited \
+                and board[tmp_i][tmp_j] == word[k]: # 如果位置合法，没有被访问过，词内容也正确
+                    visited.add((tmp_i, tmp_j))
+                    if core_function(tmp_i, tmp_j, k+1, visited):
+                        return True
+                    visited.remove((tmp_i, tmp_j)) # 回溯
             return False
+        
+        for i in range(row):
+            for j in range(col):
+                if board[i][j] == word[0] and core_function(i, j, 1,{(i, j)}) :
+                        return True
+        return False
 
-        m, n = len(board), len(board[0])
-        dx = [1, -1, 0, 0]
-        dy = [0, 0, 1, -1]
-        self.res = False
-        def dfs(word_idx, x0, y0):
-            # print word_idx
-            if word_idx >= len(word):
-                self.res = True
-                return 
-            if not self.res:
-                for k in range(len(dx)):
-                    x1 = x0 + dx[k]
-                    y1 = y0 + dy[k]
-
-                    if 0 <= x1 < m and 0 <= y1 < n and board[x1][y1] == word[word_idx]:
-                        temp = board[x1][y1]
-                        board[x1][y1] = -1
-                        dfs(word_idx + 1, x1, y1)
-                        board[x1][y1] = temp
-        for i in range(m):
-            for j in range(n):
-                if board[i][j] == word[0]:
-                    temp = board[i][j]
-                    board[i][j] = 0
-                    dfs(1, i, j)
-                    board[i][j] = temp
-        return self.res
+作者：powcai
+链接：https://leetcode.cn/problems/word-search/solutions/6907/hui-su-dfs-by-powcai/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
