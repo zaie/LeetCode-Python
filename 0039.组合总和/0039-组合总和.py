@@ -12,13 +12,13 @@ class Solution:
 
         ans = []
 
-        def find(s, use, remain):
-            for i in range(s, len(candidates)):
+        def find(start_idx, used, remain):
+            for i in range(start_idx, len(candidates)):
                 c = candidates[i]
                 if c == remain:
-                    ans.append(use + [c])
+                    ans.append(used + [c])
                 if c < remain:
-                    find(i, use + [c], remain - c)
+                    find(i, used + [c], remain - c) # 递归
                 if c > remain:
                     return
         find(0, [], target)
