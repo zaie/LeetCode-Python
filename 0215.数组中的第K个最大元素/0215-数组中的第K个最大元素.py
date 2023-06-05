@@ -1,3 +1,35 @@
+# åº“å‡½æ•°
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        return sorted(nums, reverse = True)[k - 1]
+    
+# æ‰‹å†™å¿«é€Ÿæ’åº
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        def partition(left, right):
+            pivot = nums[left]
+            l = left + 1
+            r = right
+            while l <= r:
+                if nums[l] < pivot and nums[r] > pivot:
+                    nums[l], nums[r] = nums[r], nums[l]
+                if nums[l] >= pivot:
+                    l += 1
+                if nums[r] <= pivot:
+                    r -= 1
+            nums[r], nums[left] = nums[left], nums[r]
+            return r
+        left = 0
+        right = len(nums) - 1
+        while 1:
+            idx = partition(left, right)
+            if idx == k - 1:
+                return nums[idx]
+            if idx < k - 1:
+                left = idx + 1
+            if idx > k - 1:
+                right = idx - 1
+
 class Solution(object):
     def findKthLargest(self, nums, k):
         """
@@ -10,9 +42,9 @@ class Solution(object):
             pos = self.partition(nums, left, right)
             if pos == target:
                 return nums[pos]
-            elif pos > k: #ÒªÍù×óÕÒ
+            elif pos > k: #è¦å¾€å·¦æ‰¾
                 right = pos - 1
-            elif pos < k: #ÒªÍùÓÒÕÒ
+            elif pos < k: #è¦å¾€å³æ‰¾
                 left = pos + 1
                 
     def partition(self, nums, left, right):
@@ -27,4 +59,4 @@ class Solution(object):
                 index += 1
                 nums[i], nums[index] = nums[index], nums[i]
         nums[left], nums[index] = nums[index], nums[left]
-        return index #´ËÊ±ËùÓĞindex×ó²àµÄÖµ¶¼±Ènums[index]´ó£¬ ËùÓĞÓÒ²àµÄÖµ¶¼±Ènums[index]Ğ¡
+        return index #æ­¤æ—¶æ‰€æœ‰indexå·¦ä¾§çš„å€¼éƒ½æ¯”nums[index]å¤§ï¼Œ æ‰€æœ‰å³ä¾§çš„å€¼éƒ½æ¯”nums[index]å°
