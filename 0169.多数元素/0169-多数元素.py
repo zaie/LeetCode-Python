@@ -1,3 +1,6 @@
+摩尔投票法（Boyer–Moore majority vote algorithm），
+也被称作「多数投票法」，算法解决的问题是：如何在任意多的候选人中（选票无序），选出获得票数最多的那个。要求众数过半
+
 class Solution(object):
     def majorityElement(self, nums):
         """
